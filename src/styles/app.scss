@@ -1,0 +1,70 @@
+@import './variables';
+@import 'reset';
+@import './mixins';
+
+@keyframes item-fade-in-from-right {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(30%, 0);
+  }
+
+  100% {
+    opacity: 0.5;
+    visibility: visible;
+    transform: translate(0, 0);
+  }
+}
+
+body {
+  padding: 30px;
+  background: url('https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat;
+  background-size: cover;
+}
+
+.counter__value {
+  margin: 15px 0;
+  width: 117px;
+  text-align: center;
+  padding: 10px 5px;
+  border: 1px solid;
+  border-color: #60a3d8 #2970a9 #2970a9 #60a3d8;
+  border-radius: 6px;
+}
+
+.todo {
+  margin-top: 30px;
+  padding: 30px;
+  border: 2px solid rgb(255, 228, 225);
+  border-radius: 5px;
+}
+
+.todo__controls {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.todo__controls-btn {
+  margin-left: 10px;
+}
+
+.todo__item {
+  display: list-item;
+  justify-content: space-between;
+  margin-top: 5px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.todo__item--preview {
+  opacity: 0.6;
+  animation: item-fade-in-from-right 0.5s;
+}
+
+.todo__controls-input {
+  margin-right: 20px;
+  border-radius: 5px;
+  padding: 5px;
+}
