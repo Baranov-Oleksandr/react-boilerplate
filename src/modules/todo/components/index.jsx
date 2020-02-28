@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import Switch from '@material-ui/core/Switch';
+import TextField from '@material-ui/core/TextField';
 import {
   addTodo, updateTodo, removeTodo, setFilter,
 } from '../actions';
@@ -42,20 +43,23 @@ export const Todo = () => {
   return (
     <div className="todo">
       <div className="todo__controls">
-        <input
+        <TextField
           className="todo__controls-input"
-          placeholder="Please type in task"
+          label="Please type in task"
+          variant="outlined"
           value={titleValue}
+          autoFocus
           onChange={handleTodoTitleChange}
           onKeyDown={handleTodoTitleInputKeydown}
         />
-        <input
+        <TextField
           className="todo__controls-input"
-          placeholder="Please type in filter"
+          label="Please type in filter"
+          variant="outlined"
+          value={filter}
           onChange={handleFilterChange}
         />
         <Button
-          className="todo__controls-btn"
           variant="contained"
           disabled={!trimmedValue}
           color="primary"

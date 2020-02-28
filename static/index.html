@@ -214,21 +214,18 @@
 
     /* Spinner END */
   </style>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
   <% for (var css in htmlWebpackPlugin.files.css) { %>
   <link rel="stylesheet" property="stylesheet" href="<%= htmlWebpackPlugin.files.css[css] %>">
   <% } %>
 </head>
 <body>
-<div id="root"></div>
-<hr>
-<div class="todo">
-  <div class="todo__controls">
-    <input id="todo-task-input" class="todo__controls-input" type="text" placeholder="Please type in task" />
-    <input id="todo-filter-input" class="todo__controls-input" type="text" placeholder="Please type in filter" />
-    <button class="todo__controls-btn" id="todo-btn-add">Add</button>
+<div id="root">
+  <div class="shell-loader">
+    <img class="shell-loader__i-logo" src="assets/svg/logo.svg">
+    <div class="shell-loader__spinner-container">
+      <div class="shell-loader__spinner"><span></span></div>
+    </div>
   </div>
-  <div id="todo-list-root"></div>
 </div>
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
