@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { counterReducer } from '../modules/counter/reducer';
 import { todoReducer } from '../modules/todo/reducer';
 
@@ -7,6 +8,24 @@ const combinedReducers = combineReducers({
   todoReducer,
 });
 
-export const store = createStore(combinedReducers,
+const logger = () => next => action => {
+  next(action);
+};
+
+export const asyncActionsMiddleware = () => next => action => {
+  if (typeof action === 'function') {
+    action(next);
+  } else {
+    next(action);
+  }
+};
+
+const middlewares = [asyncActionsMiddleware, logger];
+const middlewareEnhancer = applyMiddleware(...middlewares);
+const enhancers = [middlewareEnhancer];
+
+export const store = createStore(
+  combinedReducers,
   undefined,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+  composeWithDevTools(...enhancers),
+);

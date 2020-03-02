@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
-import Switch from '@material-ui/core/Switch';
 import TextField from '@material-ui/core/TextField';
+import Switch from '@material-ui/core/Switch';
+import CircularProgress from "@material-ui/core/CircularProgress";
 import {
-  addTodo, updateTodo, removeTodo, setFilter,
+  addTodo, getTodoItems, updateTodo, removeTodo, setFilter,
 } from '../actions';
 
 export const Todo = () => {
   const todoReducer = useSelector(state => state.todoReducer);
   const dispatch = useDispatch();
   const [titleValue, setTitleValue] = useState('');
-  const { filter, items } = todoReducer;
+  const { isLoading, filter, items } = todoReducer;
   const trimmedValue = titleValue.trim();
+
+  useEffect (() => {
+    dispatch(getTodoItems())
+  }, []);
+
   const filteredItems = items.filter(item => (
     item.title.toLowerCase().indexOf(filter.trim().toLowerCase()) !== -1
   ));
@@ -26,19 +32,27 @@ export const Todo = () => {
     }
   };
 
-  const handleTodoTitleChange = event => {
-    setTitleValue(event.target.value);
-  };
-
   const handleTodoTitleInputKeydown = event => {
     if (event.key === 'Enter') {
       handleAddTodoItem();
     }
   };
 
+  const handleTodoTitleChange = event => {
+    setTitleValue(event.target.value);
+  };
+
   const handleFilterChange = event => {
     dispatch(setFilter(event.target.value));
   };
+
+  if (isLoading) {
+    return (
+      <div className="todo">
+        <CircularProgress className="todo_spinner" />
+      </div>
+    );
+  }
 
   return (
     <div className="todo">

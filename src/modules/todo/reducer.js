@@ -1,14 +1,11 @@
 import {
-  TODO_ADD, TODO_UPDATE, TODO_REMOVE, TODO_SET_FILTER,
+  TODO_ADD, TODO_GET_ITEMS, TODO_GET_ITEMS_SUCCESS, TODO_UPDATE, TODO_REMOVE, TODO_SET_FILTER,
 } from './constants';
 
 const initialState = {
   filter: '',
-  items: [
-    { id: Date.now() + Math.random(), isCompleted: false, title: 'Вынести мусор' },
-    { id: Date.now() + Math.random(), isCompleted: false, title: 'Попылесосить' },
-    { id: Date.now() + Math.random(), isCompleted: false, title: 'Покушать' },
-  ],
+  isLoading: false,
+  items: [],
 };
 
 export function todoReducer(state = initialState, { type, payload }) {
@@ -23,6 +20,21 @@ export function todoReducer(state = initialState, { type, payload }) {
           payload,
         ],
       };
+
+    case TODO_GET_ITEMS: {
+        return {
+          ...state,
+          isLoading: true,
+        };
+      }
+
+    case TODO_GET_ITEMS_SUCCESS: {
+      return{
+        ...state,
+        isLoading: false,
+        items: payload,
+      };
+    }
 
     case TODO_UPDATE: {
       const newItems = items.map(item => {
