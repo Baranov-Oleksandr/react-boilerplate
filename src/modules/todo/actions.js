@@ -1,7 +1,7 @@
 import {
-  TODO_ADD, TODO_GET_ITEMS, TODO_GET_ITEMS_SUCCESS, TODO_UPDATE, TODO_REMOVE, TODO_SET_FILTER
+  TODO_ADD, TODO_GET_ITEMS, TODO_GET_ITEMS_SUCCESS, TODO_UPDATE, TODO_REMOVE, TODO_SET_FILTER,
 } from './constants';
-import { requestTodoItems } from "../../services/api";
+import { requestTodoItems } from './services/api';
 
 export function addTodo(title) {
   return {
@@ -14,7 +14,7 @@ export function addTodo(title) {
   };
 }
 
-export function getTodoItemsSuccess(items) {
+export function getTodoItemSuccess(items) {
   return {
     type: TODO_GET_ITEMS_SUCCESS,
     payload: items,
@@ -28,7 +28,7 @@ export function getTodoItems() {
     });
 
     requestTodoItems().then(result => {
-      dispatch(getTodoItemsSuccess(result));
+      dispatch(getTodoItemSuccess(result));
     });
   };
 }

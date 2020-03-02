@@ -1,5 +1,4 @@
-import {
-  TODO_ADD, TODO_GET_ITEMS, TODO_GET_ITEMS_SUCCESS, TODO_UPDATE, TODO_REMOVE, TODO_SET_FILTER,
+import {TODO_ADD, TODO_GET_ITEMS, TODO_GET_ITEMS_SUCCESS, TODO_UPDATE, TODO_REMOVE, TODO_SET_FILTER,
 } from './constants';
 
 const initialState = {
@@ -22,14 +21,14 @@ export function todoReducer(state = initialState, { type, payload }) {
       };
 
     case TODO_GET_ITEMS: {
-        return {
-          ...state,
-          isLoading: true,
-        };
-      }
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
 
     case TODO_GET_ITEMS_SUCCESS: {
-      return{
+      return {
         ...state,
         isLoading: false,
         items: payload,
@@ -53,6 +52,7 @@ export function todoReducer(state = initialState, { type, payload }) {
         items: newItems,
       };
     }
+
 
     case TODO_REMOVE: {
       const newItems = items.filter(item => item.id !== payload.id);
