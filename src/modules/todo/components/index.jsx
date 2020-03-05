@@ -83,8 +83,8 @@ export const Todo = () => {
         </Button>
       </div>
       <ul>
-        { filteredItems.map(({ _id, isCompleted, title }) => (
-          <li className="todo__item" key={_id}>
+        { filteredItems.map(({ id, isCompleted, title }) => (
+          <li className="todo__item" key={id}>
             <Switch
               value={isCompleted}
               onChange={value => {
@@ -93,7 +93,7 @@ export const Todo = () => {
             />
             { title }
             <IconButton
-              onClick={() => { dispatch(removeTodo(_id)); }}
+              onClick={() => { dispatch(removeTodo(id)); }}
             >
               <Icon>delete</Icon>
             </IconButton>

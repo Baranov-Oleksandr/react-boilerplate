@@ -1,13 +1,15 @@
-const MOCKED_TODO_ITEMS = [
-  { id: Date.now() + Math.random(), isCompleted: false, title: 'Вынести мусор' },
-  { id: Date.now() + Math.random(), isCompleted: false, title: 'Попылесосить' },
-  { id: Date.now() + Math.random(), isCompleted: false, title: 'Покушать' },
-];
+const API_URL = 'http://90acda65.ngrok.io/api/todo';
 
-export const requestTodoItems = () => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(MOCKED_TODO_ITEMS);
-    }, 3000);
-  });
+export const postTodoItem = todo => {
+  fetch(`${API_URL}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(todo),
+  })
+    .then(response => response.json())
+    .then(result => (result));
 };
+
+export const requestTodoItems = () => fetch(`${API_URL}`).then(response => response.json());

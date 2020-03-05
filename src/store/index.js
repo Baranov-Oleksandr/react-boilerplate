@@ -9,9 +9,9 @@ const combinedReducers = combineReducers({
 });
 
 const logger = () => next => action => {
-console.log('action begin');
-console.log(JSON.stringify(action, null, 4));
-console.log('action end');
+// console.log('action begin');
+// console.log(JSON.stringify(action, null, 4));
+// console.log('action end');
 next(action);
 };
 
@@ -32,5 +32,5 @@ const enhancers = [middlewareEnhancer];
 export const store = createStore(
   combinedReducers,
   undefined,
-composeWithDevTools(...enhancers),
+  composeWithDevTools(...enhancers),
 );
